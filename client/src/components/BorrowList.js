@@ -7,28 +7,35 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
+import ReturnButton from './ReturnButton';
 
 class BorrowList extends Component{
-    constructor (props){
-        super(props)
-        setState ({
-            open : false
+   constructor(props){
+       super(props)
+           this.setState({
+               good : true
+           })
+       }
+       
+      handleCloseButton = () =>{
+        this.setState({
+            good : false
         })
-    }
+      }
+      handleClick = () =>{
+        this.setState({
+            good : true
+        })
+      }
+   
     render(){
         return(
-            <div>
                 <TableRow>
-                    <TableCell>{this.props.}</TableCell>
+                    <TableCell>{this.props.movietitle}</TableCell>
+                    <TableCell>{this.props.moviecost}</TableCell>
+                    <TableCell>{this.props.genrename}</TableCell> 
+                    <ReturnButton></ReturnButton>
                 </TableRow>
-                <Button variant="contained" color ="primary" >
-                    비디오 반납
-                </Button>
-                <Dialog open ={this.props.signUp} onClose = {this.props.handleCloseButton}>
-                    <DialogTitle> 비디오 반납</DialogTitle>
-                    <DialogContent></DialogContent>
-                </Dialog>
-            </div>
         )
     }
 }

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Signup from './components/Signup';
 import Borrow from './components/Borrow';
-//import BorrowList from './components/BorrowList';
+import BorrowList from './components/BorrowList';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
@@ -25,15 +25,25 @@ class App extends Component {
       }
     
   }
-  
+  componentDidMount(){
+    this.callApi()
+      .then(res=> this.setState({borrowTable : res}))
+      .catch(err => console.log(err));
+  }
+  callApi = async()=>{
+    const response = await fetch('/api/users');
+    const body = await response.json();
+    return body;
+  }
   render(){
-    // const callTable = (data)=>{
-    //   return data.map((c)=>{
-    //     return(
-    //       <BorrowList></BorrowList>
-    //     )
-    //   })
-    // }
+    const callTable = (data)=>{
+      return data.map((c)=>{
+        return(
+          <BorrowList movietitle = {c.movietitle} moviecost = {c.moviecost}
+          genrename = {c.genrename}></BorrowList>
+        )
+      })
+    }
 
     return (
       <div>
@@ -44,8 +54,18 @@ class App extends Component {
               <TableCell><Borrow></Borrow></TableCell>
             </TableRow>
           </TableHead>
+        </Table>
+        <Table>
+        <TableHead>
+            <TableRow>
+              <TableCell>영화제목</TableCell>
+              <TableCell>영화가격</TableCell>
+              <TableCell>장르</TableCell>
+              <TableCell>반납</TableCell>
+            </TableRow>
+          </TableHead>
           <TableBody>
-         
+              {this.state.borrowTable ? callTable(this.state.borrowTable) : "데이터를 불러오는중"}
           </TableBody>
         </Table>
       
