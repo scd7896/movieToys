@@ -22,7 +22,8 @@ class App extends Component {
     super(props)
       this.state ={
         borrowTable : '',
-        hostTable : ''
+        hostTable : '',
+        searchKeyword : ''
       }
     
   }
@@ -46,12 +47,28 @@ class App extends Component {
     const body = await response.json();
     return body;
   }
+
+  stateRefresh = () =>{
+    this.setState({
+      hostTable: '',
+      borrowTable : '',
+      completed: 0,
+      searchKeyword : ''
+    })
+    this.callApi()
+      .then(res => this.setState({borrowTable : res}))
+      .catch(err => console.log(err));
+    this.callApi2()
+    .then(res => this.setState({hostTable : res}))
+    .catch(err => console.log(err));
+  }
+
   render(){
     const callTable = (data)=>{
-      return data.map((c)=>{
+      return data.map((c,index)=>{
         return(
           <BorrowList movietitle = {c.movietitle} moviecost = {c.moviecost}
-          genrename = {c.genrename}></BorrowList>
+          genrename = {c.genrename} key = {index}></BorrowList>
         )
       })
     }
@@ -62,7 +79,7 @@ class App extends Component {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell><HostTable hostTable ={this.state.hostTable}></HostTable></TableCell>
+              <TableCell><HostTable stateRefresh ={this.stateRefresh} hostTable ={this.state.hostTable}></HostTable></TableCell>
               <TableCell><Borrow></Borrow></TableCell>
             </TableRow>
           </TableHead>

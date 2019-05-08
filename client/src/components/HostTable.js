@@ -33,9 +33,10 @@ class HostTable extends Component{
     }
     render(){
         const callTable = (data)=>{
-            return data.map((c)=>{
+            return data.map((c, index)=>{
               return(
-                <HostList hostname ={c.hostname} hosthome = {c.hosthome} hostphone = {c.hostphone} gradename = {c.gradename}></HostList>
+                <HostList hostname ={c.hostname} hosthome = {c.hosthome} hostphone = {c.hostphone} gradename = {c.gradename}
+                    key = {c.index}></HostList>
               )
             })
           }
@@ -44,20 +45,22 @@ class HostTable extends Component{
                 <Button onClick = {this.clickHandling}>회원리스트보기</Button>
                 <Dialog open ={this.state.openD} onClose = {this.closeHandling}>
                     <DialogTitle>회원 리스트</DialogTitle>
-                    <Table>
-                       <TableHead>
-                           <TableRow>
-                               <TableCell> 이름</TableCell>
-                               <TableCell>주소</TableCell>
-                               <TableCell>연락처</TableCell>
-                               <TableCell>회원등급</TableCell>
-                           </TableRow>
-                       </TableHead>
-                       <TableBody>
-                       {this.props.hostTable ? callTable(this.props.hostTable) : "데이터를 불러오는중"}
-                       </TableBody>
-                    </Table>
-                   <Signup></Signup>
+                    <DialogContent>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell> 이름</TableCell>
+                                    <TableCell>주소</TableCell>
+                                    <TableCell>연락처</TableCell>
+                                    <TableCell>회원등급</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {this.props.hostTable ? callTable(this.props.hostTable) : "데이터를 불러오는중"}
+                            </TableBody>
+                        </Table>
+                    </DialogContent>
+                   <Signup stateRefresh = {this.props.stateRefresh}></Signup>
                 </Dialog>
             </div>
         )

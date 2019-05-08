@@ -1,6 +1,5 @@
 
-const dbconfig = require('./dbconfig');
-const http = require('http');
+
 const express  = require('express');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 5000;
@@ -18,7 +17,8 @@ const connection = mysql.createConnection({
 });
 connection.connect();
 
-
+const multer = require('multer');
+const upload = multer({dest : './upload'});
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
 
@@ -38,5 +38,22 @@ app.get('/api/hosts', (req, res)=>{
     (err,rows,fields)=>{
         res.send(rows);
     })
+})
+
+app.post('/api/hostadd', upload.single('image'),(req, res)=>{
+  let sql = 'INSERT INTO hosts VALUES(?,?,?,?,1)';
+  console.log(req.body.hostnumber + "상태확인");
+  const hostnumber = req.body.hostnumber;
+  const hostname = req.body.hostname;
+  const hostphone = req.body.hostphone;
+  const hosthome = req.body.hosthome;
+  let params = [hostnumber,hostname,hosthome,hostphone];
+
+  
+  connection.query(sql,params,
+    (err,rows,fileds) =>{
+      res.send(rows);  
+    }
+  );
 })
 app.listen(port, () => console.log(`check ${port}`));

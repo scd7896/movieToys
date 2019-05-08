@@ -8,6 +8,7 @@
     },
     "dependencies": {
         "@material-ui/core": "^3.9.3",
+        "axios": "^0.18.0",
         "body-parser": "^1.18.3",
         "express": "^4.16.4",
         "material-ui": "^0.20.2",
@@ -21,4 +22,3 @@
         "concurrently": "^4.1.0"
     }
 }
-
