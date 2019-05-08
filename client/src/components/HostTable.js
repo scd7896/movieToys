@@ -45,6 +45,14 @@ class HostTable extends Component{
                 <Dialog open ={this.state.openD} onClose = {this.closeHandling}>
                     <DialogTitle>회원 리스트</DialogTitle>
                     <Table>
+                       <TableHead>
+                           <TableRow>
+                               <TableCell> 이름</TableCell>
+                               <TableCell>주소</TableCell>
+                               <TableCell>연락처</TableCell>
+                               <TableCell>회원등급</TableCell>
+                           </TableRow>
+                       </TableHead>
                        <TableBody>
                        {this.props.hostTable ? callTable(this.props.hostTable) : "데이터를 불러오는중"}
                        </TableBody>

@@ -7,7 +7,7 @@ class HostList extends Component{
         return(
             <TableRow>
                 <TableCell>{this.props.hostname}</TableCell>
-                <TableCell>{this.props.hostname}</TableCell>
+                <TableCell>{this.props.hosthome}</TableCell>
                 <TableCell>{this.props.hostphone}</TableCell>
                 <TableCell>{this.props.gradename}</TableCell>
             </TableRow>
