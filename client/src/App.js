@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-import Signup from './components/Signup';
+import HostTable from './components/HostTable'
 import Borrow from './components/Borrow';
 import BorrowList from './components/BorrowList';
 import TableHead from '@material-ui/core/TableHead';
@@ -21,7 +21,8 @@ class App extends Component {
   constructor(props){
     super(props)
       this.state ={
-        borrowTable : ''
+        borrowTable : '',
+        hostTable : ''
       }
     
   }
@@ -29,7 +30,17 @@ class App extends Component {
     this.callApi()
       .then(res=> this.setState({borrowTable : res}))
       .catch(err => console.log(err));
+    this.callApi2()
+        .then(res => this.setState({
+          hostTable : res
+        }))
+      .catch(err=>console.log(err));
   }
+  callApi2 = async() =>{
+    const response = await fetch('/api/hosts');
+    const body = await response.json();
+    return body;
+}
   callApi = async()=>{
     const response = await fetch('/api/users');
     const body = await response.json();
@@ -44,13 +55,14 @@ class App extends Component {
         )
       })
     }
+    
 
     return (
       <div>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell><Signup></Signup></TableCell>
+              <TableCell><HostTable hostTable ={this.state.hostTable}></HostTable></TableCell>
               <TableCell><Borrow></Borrow></TableCell>
             </TableRow>
           </TableHead>

@@ -19,13 +19,20 @@ class ReturnButton extends Component{
             good : true
         })
       }
+      returnVideo = () =>{
+          this.setState({
+              good:false
+          })
+      }
     render(){
         return(
             <div>
                     <Button variant = "contained" color = "primary" onClick ={this.handleClick}> 비디오반납</Button>
                     <Dialog open = {this.state.good} onClose = {this.handleCloseButton}>
                         <DialogTitle> 반납확인</DialogTitle>
-                        <DialogContent></DialogContent>
+                        <DialogContent>반납하시겠습니까??</DialogContent>
+                        <Button onClick = {this.returnVideo}>확인</Button><Button onClick = {this.handleCloseButton}>취소</Button>
+
                     </Dialog>
             </div>
         )
