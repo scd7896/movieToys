@@ -5,7 +5,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
+import TableCell from '@material-ui/core/TableCell';
 class Borrow extends Component{
     constructor(props){
         super(props);
@@ -25,7 +25,7 @@ class Borrow extends Component{
       }
     render(){
         return(
-            <div>
+            <TableCell>
                 <Button variant="contained" color ="primary" onClick ={this.handleClick}>
                     비디오 빌리기
                 </Button>
@@ -33,7 +33,7 @@ class Borrow extends Component{
                     <DialogTitle> 비디오 대여</DialogTitle>
                     <DialogContent></DialogContent>
                 </Dialog>
-            </div>
+            </TableCell>
         )
     }
 }

@@ -43,7 +43,6 @@ class Signup extends Component{
           this.setState({
             signUp : false,
             hostname :'',
-            hostnumber : '',
             hostphone : '',
             hosthome : ''
           })
@@ -51,7 +50,6 @@ class Signup extends Component{
   addHosts = () =>{
     const url = 'api/hostadd';
     let formData = new FormData();
-    formData.append('hostnumber', this.state.hostnumber);
     formData.append('hostname', this.state.hostname);
     formData.append('hostphone', this.state.hostphone);
     formData.append('hosthome', this.state.hosthome);
@@ -61,28 +59,27 @@ class Signup extends Component{
             'content-type' :'multipart/form-data'
         }
     }
-    return post(url, formData,config);
+    return post(url, formData, config);
 }
     render(){
         return(
-            <div>
+            <DialogActions>
         <Button variant = "contained" color = "primary" onClick ={this.handleClick}> 회원가입</Button>
         <Dialog open ={this.state.signUp} onClose = {this.handleCloseButton}>
           <DialogTitle> 회원가입</DialogTitle>
           <DialogContent>
-          <div><TextField value = {this.state.hostnumber} type ="text" name="hostnumber" label ="ID" onChange = {this.handleValueChange}></TextField></div>
           <div><TextField value = {this.state.hostname} type ="text" name="hostname" label ="이름" onChange = {this.handleValueChange}></TextField></div>
           <div><TextField value = {this.state.hostphone} type ="text" name="hostphone" label ="핸드폰" onChange = {this.handleValueChange}></TextField></div>
           <div><TextField value = {this.state.hosthome} type ="text" name="hosthome" label ="주소" onChange = {this.handleValueChange}></TextField></div>
           </DialogContent>
           <DialogActions>
           <Button variant="contained" color ="primary" onClick = {this.handleFormSubmit}>회원가입</Button> 
-          <Button variant="contained"className="submit" onClick = {this.handleCloseButton}>취소하기</Button>
+          <Button variant="contained" onClick = {this.handleCloseButton}>취소하기</Button>
           </DialogActions>
           
           </Dialog>
         
-          </div>
+          </DialogActions>
         )
     }
 }

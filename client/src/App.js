@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
+
 import HostTable from './components/HostTable'
 import Borrow from './components/Borrow';
 import BorrowList from './components/BorrowList';
@@ -8,7 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableBody from '@material-ui/core/TableBody';
 import Table from '@material-ui/core/Table';
-
+import AddVedio from './components/AddVedio';
 
 
 const styles = theme =>({
@@ -72,15 +72,16 @@ class App extends Component {
         )
       })
     }
-    
+  
 
     return (
       <div>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell><HostTable stateRefresh ={this.stateRefresh} hostTable ={this.state.hostTable}></HostTable></TableCell>
-              <TableCell><Borrow></Borrow></TableCell>
+              <HostTable stateRefresh ={this.stateRefresh} hostTable ={this.state.hostTable}></HostTable>
+              <Borrow></Borrow>
+              <AddVedio stateRefresh = {this.stateRefresh}></AddVedio>
             </TableRow>
           </TableHead>
         </Table>
@@ -94,7 +95,7 @@ class App extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-              {this.state.borrowTable ? callTable(this.state.borrowTable) : "데이터를 불러오는중"}
+              {this.state.borrowTable ? callTable(this.state.borrowTable) : "데이터를 불러오는중"  }
           </TableBody>
         </Table>
       

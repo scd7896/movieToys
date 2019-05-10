@@ -36,13 +36,13 @@ class HostTable extends Component{
             return data.map((c, index)=>{
               return(
                 <HostList hostname ={c.hostname} hosthome = {c.hosthome} hostphone = {c.hostphone} gradename = {c.gradename}
-                    key = {c.index}></HostList>
+                    key = {index}></HostList>
               )
             })
           }
         return(
-            <div>
-                <Button onClick = {this.clickHandling}>회원리스트보기</Button>
+            <TableCell>
+                <Button variant="contained" color = "primary" onClick = {this.clickHandling}>회원리스트보기</Button>
                 <Dialog open ={this.state.openD} onClose = {this.closeHandling}>
                     <DialogTitle>회원 리스트</DialogTitle>
                     <DialogContent>
@@ -62,7 +62,7 @@ class HostTable extends Component{
                     </DialogContent>
                    <Signup stateRefresh = {this.props.stateRefresh}></Signup>
                 </Dialog>
-            </div>
+            </TableCell>
         )
     }
 }

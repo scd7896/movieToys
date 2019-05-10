@@ -41,13 +41,12 @@ app.get('/api/hosts', (req, res)=>{
 })
 
 app.post('/api/hostadd', upload.single('image'),(req, res)=>{
-  let sql = 'INSERT INTO hosts VALUES(?,?,?,?,1)';
+  let sql = 'INSERT INTO hosts VALUES(null,?,?,?,1)';
   console.log(req.body.hostnumber + "상태확인");
-  const hostnumber = req.body.hostnumber;
   const hostname = req.body.hostname;
   const hostphone = req.body.hostphone;
   const hosthome = req.body.hosthome;
-  let params = [hostnumber,hostname,hosthome,hostphone];
+  let params = [hostname,hosthome,hostphone];
 
   
   connection.query(sql,params,
@@ -55,5 +54,22 @@ app.post('/api/hostadd', upload.single('image'),(req, res)=>{
       res.send(rows);  
     }
   );
+})
+
+app.post('/api/vedioadd', upload.single(),(req,res)=>{
+    
+    
+    const movietitle = req.body.movietitle;
+    const copytype = req.body.copytype;
+    let sql = `INSERT INTO tape VALUES(null,( SELECT moviecode  FROM movie WHERE movietitle = '${movietitle}'),(SELECT typecode FROM copytype WHERE typename = '${copytype}'));`;
+    console.log(movietitle + "상태확인");
+    console.log(copytype + "상태확인");
+    let params = [movietitle, copytype];
+    connection.query(sql,params,
+        (err,rows,fileds)=>{
+            res.send(rows);
+        })
+    
+    
 })
 app.listen(port, () => console.log(`check ${port}`));
