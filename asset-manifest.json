@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/movieToys/static/css/main.2d0c69ab.chunk.css",
+    "main.js": "/movieToys/static/js/main.ae037ab6.chunk.js",
+    "main.js.map": "/movieToys/static/js/main.ae037ab6.chunk.js.map",
+    "runtime~main.js": "/movieToys/static/js/runtime~main.8ea2dc70.js",
+    "runtime~main.js.map": "/movieToys/static/js/runtime~main.8ea2dc70.js.map",
+    "static/js/2.1bcbab23.chunk.js": "/movieToys/static/js/2.1bcbab23.chunk.js",
+    "static/js/2.1bcbab23.chunk.js.map": "/movieToys/static/js/2.1bcbab23.chunk.js.map",
+    "index.html": "/movieToys/index.html",
+    "precache-manifest.cc0f97c41627db556a91b15e0ec944f3.js": "/movieToys/precache-manifest.cc0f97c41627db556a91b15e0ec944f3.js",
+    "service-worker.js": "/movieToys/service-worker.js",
+    "static/css/main.2d0c69ab.chunk.css.map": "/movieToys/static/css/main.2d0c69ab.chunk.css.map"
+  }
+}
