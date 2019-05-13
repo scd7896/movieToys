@@ -15,7 +15,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy" : "npm run build&&gh-pages -d build"
+    "deploy": "npm run build&&gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,6 +32,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000"
-  
+  "proxy": "http://localhost:5000",
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
+  }
 }
