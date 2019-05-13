@@ -67,8 +67,8 @@ class App extends Component {
     const callTable = (data)=>{
       return data.map((c,index)=>{
         return(
-          <BorrowList movietitle = {c.movietitle} moviecost = {c.moviecost}
-          genrename = {c.genrename} key = {index}></BorrowList>
+          <BorrowList  movietitle = {c.movietitle} moviecost = {c.moviecost}
+          genrename = {c.genrename} hostnumber = {c.hostnumber}></BorrowList>
         )
       })
     }
@@ -80,7 +80,7 @@ class App extends Component {
           <TableHead>
             <TableRow>
               <HostTable stateRefresh ={this.stateRefresh} hostTable ={this.state.hostTable}></HostTable>
-              <Borrow></Borrow>
+              <Borrow hostTable ={this.state.hostTable}></Borrow>
               <AddVedio stateRefresh = {this.stateRefresh}></AddVedio>
             </TableRow>
           </TableHead>

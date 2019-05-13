@@ -34,7 +34,7 @@ app.get('/api/users', (req, res)=>{
 
 app.get('/api/hosts', (req, res)=>{
     connection.query(
-        "SELECT hostname, hosthome, hostphone, gradename FROM hosts JOIN hostgrade USING(gradecode);",
+        "SELECT hostnumber, hostname, hosthome, hostphone, gradename FROM hosts JOIN hostgrade USING(gradecode);",
     (err,rows,fields)=>{
         res.send(rows);
     })
@@ -47,8 +47,6 @@ app.post('/api/hostadd', upload.single('image'),(req, res)=>{
   const hostphone = req.body.hostphone;
   const hosthome = req.body.hosthome;
   let params = [hostname,hosthome,hostphone];
-
-  
   connection.query(sql,params,
     (err,rows,fileds) =>{
       res.send(rows);  
@@ -57,19 +55,13 @@ app.post('/api/hostadd', upload.single('image'),(req, res)=>{
 })
 
 app.post('/api/vedioadd', upload.single(),(req,res)=>{
-    
-    
     const movietitle = req.body.movietitle;
     const copytype = req.body.copytype;
     let sql = `INSERT INTO tape VALUES(null,( SELECT moviecode  FROM movie WHERE movietitle = '${movietitle}'),(SELECT typecode FROM copytype WHERE typename = '${copytype}'));`;
-    console.log(movietitle + "상태확인");
-    console.log(copytype + "상태확인");
     let params = [movietitle, copytype];
     connection.query(sql,params,
         (err,rows,fileds)=>{
             res.send(rows);
         })
-    
-    
 })
 app.listen(port, () => console.log(`check ${port}`));
