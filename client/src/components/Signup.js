@@ -32,6 +32,7 @@ class Signup extends Component{
         let nextState = {};
         nextState[e.target.name] = e.target.value;
         this.setState(nextState);
+        console.log(this.state.hostname);
         
     }
     handleFormSubmit = (e) =>{

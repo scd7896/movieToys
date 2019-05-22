@@ -11,11 +11,7 @@ import Table from '@material-ui/core/Table';
 import AddVedio from './components/AddVedio';
 
 
-const styles = theme =>({
-  hidden :{
-    display : 'none'
-  }
-})
+
 
 class App extends Component {
   constructor(props){
@@ -67,8 +63,8 @@ class App extends Component {
     const callTable = (data)=>{
       return data.map((c,index)=>{
         return(
-          <BorrowList  movietitle = {c.movietitle} moviecost = {c.moviecost}
-          genrename = {c.genrename} hostnumber = {c.hostnumber}></BorrowList>
+          <BorrowList  hostname = {c.hostname} hostphone = {c.hostphone} movietitle = {c.movietitle}
+         borrowday = {c.borrowday} borrownumber = {c.borrownumber}></BorrowList>
         )
       })
     }
@@ -88,9 +84,10 @@ class App extends Component {
         <Table>
         <TableHead>
             <TableRow>
-              <TableCell>영화제목</TableCell>
-              <TableCell>영화가격</TableCell>
-              <TableCell>장르</TableCell>
+              <TableCell>회원이름</TableCell>
+              <TableCell>연락처</TableCell>
+              <TableCell>영화</TableCell>
+              <TableCell>빌려간 날짜</TableCell>
               <TableCell>반납</TableCell>
             </TableRow>
           </TableHead>

@@ -25,7 +25,15 @@ app.use(bodyParser.urlencoded({extended : true}));
 
 app.get('/api/users', (req, res)=>{
     connection.query(
-        "SELECT movietitle,moviecost,genrename FROM movie JOIN genre USING(genrecode);",
+        `SELECT hostname, hostphone, movietitle, DATE_FORMAT(borrowday, '%Y-%m-%d') borrowday, borrownumber
+        FROM borrowlist bol 
+                JOIN ( SELECT hostphone, hostname, hostnumber
+                     FROM hosts) ho ON bol.hostnumber = ho.hostnumber
+                JOIN (SELECT moviecode, tapecode
+                        FROM tape) tp ON bol.tapecode = tp.tapecode
+                JOIN (SELECT movietitle, moviecode
+                        FROM movie) mv  ON tp.moviecode = mv.moviecode;
+        `,
         (err,rows,rields) =>{
             res.send(rows);
         }
@@ -40,12 +48,13 @@ app.get('/api/hosts', (req, res)=>{
     })
 })
 
-app.post('/api/hostadd', upload.single('image'),(req, res)=>{
-  let sql = 'INSERT INTO hosts VALUES(null,?,?,?,1)';
-  console.log(req.body.hostnumber + "상태확인");
+app.post('/api/hostadd', function(req, res){
+  let sql = 'INSERT INTO hosts(hostname,hosthome,hostphone,gradecode) VALUES(?,?,?,1)';
+  
   const hostname = req.body.hostname;
   const hostphone = req.body.hostphone;
   const hosthome = req.body.hosthome;
+  console.log(hostname);
   let params = [hostname,hosthome,hostphone];
   connection.query(sql,params,
     (err,rows,fileds) =>{
@@ -59,6 +68,17 @@ app.post('/api/vedioadd', upload.single(),(req,res)=>{
     const copytype = req.body.copytype;
     let sql = `INSERT INTO tape VALUES(null,( SELECT moviecode  FROM movie WHERE movietitle = '${movietitle}'),(SELECT typecode FROM copytype WHERE typename = '${copytype}'));`;
     let params = [movietitle, copytype];
+    connection.query(sql,params,
+        (err,rows,fileds)=>{
+            res.send(rows);
+        })
+})
+
+app.delete('/api/returnvedio/:id', (req,res)=>{
+    let sql = `UPDATE borrowlist 
+    SET returnday = DATE_FORMAT(NOW(),'%Y-%m-%d') 
+    WHERE borrownumber = 1; `;
+    let params = [req.param.id]
     connection.query(sql,params,
         (err,rows,fileds)=>{
             res.send(rows);
